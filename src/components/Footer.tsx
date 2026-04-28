@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Send, Youtube, MapPin, Phone, Mail } from "lucide-react";
+import logo from "@/assets/mustang-logo.png";
 
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground mt-16">
+      <div className="container-mt pt-10 pb-4 flex items-center gap-4 border-b border-white/10">
+        <img src={logo} alt="Mustang Tape" className="h-12 w-auto" />
+        <div className="text-sm opacity-80">Пакувальні стрічки від виробника • Опт • White-label • Доставка по Україні</div>
+      </div>
       <div className="container-mt py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
         <div>
           <h4 className="font-bold mb-4 text-base">Покупцям</h4>
