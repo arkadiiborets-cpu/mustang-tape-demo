@@ -1,0 +1,15 @@
+{
+  "name": "Mustang Tape — пакувальні стрічки від виробника",
+  "short_name": "Mustang Tape",
+  "description": "Пакувальний скотч, малярна, армована, ізоляційна стрічка від виробника в Україні. Опт від 100 рулонів, white-label під ваш бренд.",
+  "lang": "uk",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#FF6B00",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/pwa-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

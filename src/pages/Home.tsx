@@ -4,11 +4,49 @@ import { ChevronLeft, ChevronRight, Truck, Factory, Tag, Palette } from "lucide-
 import { CATEGORIES, PRODUCTS, COLOR_SWATCHES, BRANDS } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import * as Icons from "lucide-react";
+import heroProduction from "@/assets/hero/hero-production.png";
+import heroWhitelabel from "@/assets/hero/hero-whitelabel.png";
+import heroDavinci from "@/assets/hero/hero-davinci.png";
 
-const SLIDES = [
-  { kicker: "З виробництва в Броварах", title: "Пакувальний скотч від виробника", sub: "Від ₴18 / шт у роздріб, від ₴14 / шт в опті від 100 рулонів. Відправка день-у-день.", cta: "До каталогу", href: "/catalog/bopp", bg: "from-[hsl(25_100%_50%)] to-[hsl(15_100%_45%)]" },
-  { kicker: "Власний цех друку", title: "White-label під ваш бренд", sub: "Ваш дизайн, ваш логотип, наша гума. Мінімальна партія від 1 000 рулонів. Готово за 14 днів.", cta: "Залишити заявку", href: "/opt-i-white-label", bg: "from-navy to-[hsl(211_55%_25%)]" },
-  { kicker: "Італійська рисова стрічка", title: "Da Vinci Line — професійна малярна", sub: "Чітка лінія наче лезом, не підриває лакофарбові, тримає на сонці до 14 днів. Da Vinci Red, Green і Delicate Line — у наявності.", cta: "Перейти до малярних", href: "/catalog/malyarna", bg: "from-[hsl(280_55%_40%)] to-[hsl(220_70%_40%)]" },
+interface HeroSlide {
+  kicker: string;
+  title: string;
+  sub: string;
+  cta: string;
+  href: string;
+  image: string;
+  /** how to position the image when it's narrower than the viewport (object-position) */
+  imagePosition?: string;
+}
+
+const SLIDES: HeroSlide[] = [
+  {
+    kicker: "З виробництва в Броварах",
+    title: "Пакувальний скотч від виробника",
+    sub: "Від ₴18 / шт у роздріб, від ₴14 / шт в опті від 100 рулонів. Відправка день-у-день по всій Україні.",
+    cta: "До каталогу",
+    href: "/catalog/bopp",
+    image: heroProduction,
+    imagePosition: "right center",
+  },
+  {
+    kicker: "Власний цех друку",
+    title: "White-label під ваш бренд",
+    sub: "Ваш дизайн, ваш логотип, наша гума. Мінімальна партія від 1 000 рулонів. Готово за 14 днів.",
+    cta: "Залишити заявку",
+    href: "/opt-i-white-label",
+    image: heroWhitelabel,
+    imagePosition: "right center",
+  },
+  {
+    kicker: "Італійська рисова стрічка",
+    title: "Da Vinci Line — професійна малярна",
+    sub: "Чітка лінія наче лезом, не підриває лакофарбові, тримає на сонці до 14 днів. Da Vinci Red, Green і Delicate Line — у наявності.",
+    cta: "Перейти до малярних",
+    href: "/catalog/malyarna",
+    image: heroDavinci,
+    imagePosition: "center",
+  },
 ];
 
 export default function Home() {
@@ -26,20 +64,59 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="container-mt pt-6">
-        <div className={`relative overflow-hidden rounded-xl bg-gradient-to-r ${SLIDES[slide].bg} text-white min-h-[280px] md:min-h-[360px] flex items-center transition-all`}>
-          <div className="p-8 md:p-14 max-w-2xl animate-fade-in">
-            <div className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-2">{SLIDES[slide].kicker}</div>
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-3">{SLIDES[slide].title}</h1>
-            <p className="text-base md:text-lg opacity-90 mb-6">{SLIDES[slide].sub}</p>
-            <Link to={SLIDES[slide].href} className="inline-flex items-center gap-2 bg-white text-navy font-semibold rounded-md px-6 py-3 hover:bg-accent hover:text-accent-foreground transition-colors">
+        <div className="relative overflow-hidden rounded-xl bg-black text-white min-h-[320px] md:min-h-[440px] transition-all">
+          {/* Background photo */}
+          <img
+            src={SLIDES[slide].image}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: SLIDES[slide].imagePosition ?? "center" }}
+          />
+          {/* Left-side gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 md:via-black/85 to-black/30 md:to-black/10" />
+          {/* Text content */}
+          <div className="relative p-8 md:p-14 max-w-2xl animate-fade-in">
+            <div className="text-xs font-semibold uppercase tracking-wider text-accent mb-3 drop-shadow">
+              {SLIDES[slide].kicker}
+            </div>
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4 text-white drop-shadow-lg">
+              {SLIDES[slide].title}
+            </h1>
+            <p className="text-base md:text-lg text-white/95 mb-6 max-w-xl drop-shadow">
+              {SLIDES[slide].sub}
+            </p>
+            <Link
+              to={SLIDES[slide].href}
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold rounded-md px-6 py-3 hover:bg-primary/90 transition-colors"
+            >
               {SLIDES[slide].cta} <ChevronRight size={18} />
             </Link>
           </div>
-          <button onClick={() => setSlide((slide - 1 + SLIDES.length) % SLIDES.length)} aria-label="Попередній слайд" className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center"><ChevronLeft /></button>
-          <button onClick={() => setSlide((slide + 1) % SLIDES.length)} aria-label="Наступний слайд" className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center"><ChevronRight /></button>
+          <button
+            onClick={() => setSlide((slide - 1 + SLIDES.length) % SLIDES.length)}
+            aria-label="Попередній слайд"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-sm flex items-center justify-center"
+          >
+            <ChevronLeft />
+          </button>
+          <button
+            onClick={() => setSlide((slide + 1) % SLIDES.length)}
+            aria-label="Наступний слайд"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-sm flex items-center justify-center"
+          >
+            <ChevronRight />
+          </button>
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
             {SLIDES.map((_, i) => (
-              <button key={i} onClick={() => setSlide(i)} aria-label={`Слайд ${i+1}`} className={`h-2 rounded-full transition-all ${i === slide ? "w-8 bg-white" : "w-2 bg-white/50"}`} />
+              <button
+                key={i}
+                onClick={() => setSlide(i)}
+                aria-label={`Слайд ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  i === slide ? "w-8 bg-white" : "w-2 bg-white/50"
+                }`}
+              />
             ))}
           </div>
         </div>
