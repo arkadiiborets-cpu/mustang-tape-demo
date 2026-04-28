@@ -165,7 +165,9 @@ export function Header() {
       {mobileOpen && (
         <div className="fixed inset-0 z-50 bg-background animate-fade-in md:hidden">
           <div className="flex items-center justify-between p-4 border-b border-border">
-            <span className="font-bold text-navy">MUSTANG TAPE</span>
+            <div className="bg-navy rounded-md p-1.5">
+              <img src={logo} alt="Mustang Tape" className="h-8 w-auto" />
+            </div>
             <button onClick={() => setMobileOpen(false)} aria-label="Закрити"><X size={24} /></button>
           </div>
           <div className="p-4 space-y-1">
