@@ -53,9 +53,9 @@ export function Header() {
 
       {/* Row 2 */}
       <div className="container-mt h-20 flex items-center gap-4">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="bg-navy rounded-md p-1.5 shadow-sm">
-            <img src={logo} alt="Mustang Tape" width={120} height={48} className="h-10 w-auto object-contain" />
+        <Link to="/" className="flex items-center gap-3 shrink-0">
+          <div className="bg-navy rounded-md p-2 shadow-sm flex items-center justify-center">
+            <img src={logo} alt="Mustang Tape" width={180} height={64} className="h-12 md:h-14 w-auto object-contain" />
           </div>
           <div className="hidden sm:block leading-tight">
             <div className="text-[11px] text-muted-foreground">виробник стрічок з 2014</div>

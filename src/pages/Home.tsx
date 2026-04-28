@@ -17,7 +17,14 @@ interface HeroSlide {
   image: string;
   /** how to position the image when it's narrower than the viewport (object-position) */
   imagePosition?: string;
+  /** CSS filter for the slide image — useful to brighten dark photos */
+  imageFilter?: string;
+  /** Tailwind classes for the gradient overlay — defaults to a strong left-side fade */
+  overlayClass?: string;
 }
+
+const DEFAULT_OVERLAY =
+  "bg-gradient-to-r from-black via-black/90 md:via-black/85 to-black/30 md:to-black/10";
 
 const SLIDES: HeroSlide[] = [
   {
@@ -46,6 +53,8 @@ const SLIDES: HeroSlide[] = [
     href: "/catalog/malyarna",
     image: heroDavinci,
     imagePosition: "center",
+    imageFilter: "brightness(1.55) contrast(1.05) saturate(1.2)",
+    overlayClass: "bg-gradient-to-r from-black via-black/85 md:via-black/65 to-black/20 md:to-transparent",
   },
 ];
 
@@ -71,10 +80,13 @@ export default function Home() {
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: SLIDES[slide].imagePosition ?? "center" }}
+            style={{
+              objectPosition: SLIDES[slide].imagePosition ?? "center",
+              filter: SLIDES[slide].imageFilter,
+            }}
           />
           {/* Left-side gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 md:via-black/85 to-black/30 md:to-black/10" />
+          <div className={`absolute inset-0 ${SLIDES[slide].overlayClass ?? DEFAULT_OVERLAY}`} />
           {/* Text content */}
           <div className="relative p-8 md:p-14 max-w-2xl animate-fade-in">
             <div className="text-xs font-semibold uppercase tracking-wider text-accent mb-3 drop-shadow">
