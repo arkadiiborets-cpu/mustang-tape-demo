@@ -8,7 +8,7 @@ import * as Icons from "lucide-react";
 const SLIDES = [
   { kicker: "З виробництва в Броварах", title: "Пакувальний скотч від виробника", sub: "Від ₴18 / шт у роздріб, від ₴14 / шт в опті від 100 рулонів. Відправка день-у-день.", cta: "До каталогу", href: "/catalog/bopp", bg: "from-[hsl(25_100%_50%)] to-[hsl(15_100%_45%)]" },
   { kicker: "Власний цех друку", title: "White-label під ваш бренд", sub: "Ваш дизайн, ваш логотип, наша гума. Мінімальна партія від 1 000 рулонів. Готово за 14 днів.", cta: "Залишити заявку", href: "/opt-i-white-label", bg: "from-navy to-[hsl(211_55%_25%)]" },
-  { kicker: "12 кольорів у наявності", title: "Кольоровий BOPP-скотч", sub: "Маркування партій, святкове пакування, декор. Прозора, червона, синя, чорна та ще 8 кольорів.", cta: "Дивитися кольори", href: "/catalog/kolorovyi-bopp", bg: "from-[hsl(220_70%_45%)] to-[hsl(280_60%_45%)]" },
+  { kicker: "Італійська рисова стрічка", title: "Da Vinci Line — професійна малярна", sub: "Чітка лінія наче лезом, не підриває лакофарбові, тримає на сонці до 14 днів. Da Vinci Red, Green і Delicate Line — у наявності.", cta: "Перейти до малярних", href: "/catalog/malyarna", bg: "from-[hsl(280_55%_40%)] to-[hsl(220_70%_40%)]" },
 ];
 
 export default function Home() {
@@ -48,17 +48,16 @@ export default function Home() {
       {/* Categories */}
       <section className="container-mt py-10">
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-navy">Каталог за категоріями</h2>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {CATEGORIES.map(c => {
-            const Icon = (Icons as any)[c.icon] || Icons.Package;
-            const count = PRODUCTS.filter(p => p.category === c.slug).length;
+            const Icon = (Icons as Record<string, React.ComponentType<{ size?: number }>>)[c.icon] || Icons.Package;
             return (
               <Link key={c.slug} to={`/catalog/${c.slug}`} className="bg-surface border border-border rounded-lg p-3 md:p-4 flex flex-col items-center text-center hover:border-primary hover:bg-background transition group">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-background border border-border flex items-center justify-center mb-2 group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground transition-colors">
                   <Icon size={24} />
                 </div>
                 <span className="text-xs md:text-sm font-semibold leading-tight">{c.name}</span>
-                <span className="text-[11px] text-muted-foreground mt-1">товарів: {count > 0 ? count.toString().padStart(2, "0") : "—"}</span>
+                <span className="text-[11px] text-muted-foreground mt-1">товарів: {c.count > 0 ? c.count.toString().padStart(2, "0") : "—"}</span>
               </Link>
             );
           })}
@@ -108,12 +107,12 @@ export default function Home() {
           <Palette className="text-primary" />
           <h2 className="text-2xl md:text-3xl font-bold text-navy">Обираємо за кольором</h2>
         </div>
-        <p className="text-muted-foreground text-sm mb-5">Кольоровий BOPP-скотч, ПВХ-стрічка, Duct Tape — підбирайте відтінок під ваш бренд або тип маркування.</p>
-        <div className="grid grid-cols-6 md:grid-cols-12 gap-2">
+        <p className="text-muted-foreground text-sm mb-5">Кожен колір — окрема лінійка з реального асортименту: малярна Da Vinci, ПВХ-ізоляція, Duct Tape, фасадна стрічка.</p>
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
           {COLOR_SWATCHES.map(c => (
-            <Link key={c.value} to={`/catalog/kolorovyi-bopp?color=${c.value}`} className="group">
+            <Link key={c.value} to={`/catalog?color=${c.value}`} className="group">
               <div className="aspect-square rounded-md border border-border group-hover:scale-105 group-hover:shadow-md transition-all" style={{ backgroundColor: c.hex }} title={c.name} />
-              <div className="text-[11px] text-center mt-1 text-muted-foreground group-hover:text-foreground">{c.name}</div>
+              <div className="text-[11px] text-center mt-1 text-muted-foreground group-hover:text-foreground leading-tight">{c.name}</div>
             </Link>
           ))}
         </div>

@@ -36,7 +36,8 @@ export function Footer() {
             <li><Link to="/catalog/malyarna" className="hover:text-accent">Малярний</Link></li>
             <li><Link to="/catalog/dvostoronniy" className="hover:text-accent">Двосторонній</Link></li>
             <li><Link to="/catalog/armovanyi" className="hover:text-accent">Армований</Link></li>
-            <li><Link to="/catalog/dyspensery" className="hover:text-accent">Аксесуари</Link></li>
+            <li><Link to="/catalog/masking-roller" className="hover:text-accent">Masking Roller</Link></li>
+            <li><Link to="/catalog/spec" className="hover:text-accent">Doctor Tape, Go Tape</Link></li>
           </ul>
         </div>
         <div>

@@ -153,8 +153,9 @@ export function Header() {
           )}
         </div>
         <nav className="hidden lg:flex items-center gap-5 text-sm">
-          {["bopp", "malyarna", "dvostoronniy", "armovanyi", "kolorovyi-bopp"].map(slug => {
-            const cat = CATEGORIES.find(c => c.slug === slug)!;
+          {(["bopp", "malyarna", "dvostoronniy", "armovanyi", "masking-roller"] as const).map(slug => {
+            const cat = CATEGORIES.find(c => c.slug === slug);
+            if (!cat) return null;
             return <RRNavLink key={slug} to={`/catalog/${slug}`} className={({isActive}) => `hover:text-primary transition-colors ${isActive ? "text-primary font-semibold" : "text-foreground"}`}>{cat.name}</RRNavLink>;
           })}
           <Link to="/opt-i-white-label" className="text-accent-foreground bg-accent px-2.5 py-1 rounded font-semibold text-xs">ОПТ −20%</Link>
