@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useShop } from "@/store/shop";
 import { uah } from "@/lib/format";
 import { CATEGORIES, PRODUCTS } from "@/data/products";
+import logo from "@/assets/mustang-logo.png";
 
 export function Header() {
   const { cartCount, cartTotal, wishlist } = useShop();
@@ -53,10 +54,12 @@ export function Header() {
       {/* Row 2 */}
       <div className="container-mt h-20 flex items-center gap-4">
         <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-11 h-11 bg-primary text-primary-foreground rounded-md flex items-center justify-center font-bold text-2xl shadow-sm">M</div>
+          <div className="bg-navy rounded-md p-1.5 shadow-sm">
+            <img src={logo} alt="Mustang Tape" width={120} height={48} className="h-10 w-auto object-contain" />
+          </div>
           <div className="hidden sm:block leading-tight">
-            <div className="font-bold text-navy text-lg tracking-tight">MUSTANG TAPE</div>
             <div className="text-[11px] text-muted-foreground">виробник стрічок з 2014</div>
+            <div className="text-[11px] text-muted-foreground">Бровари, Україна</div>
           </div>
         </Link>
 
